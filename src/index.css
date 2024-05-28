@@ -5,5 +5,20 @@
 html,
 body,
 #root {
-  @apply min-h-full min-w-full overflow-x-auto bg-slate-950 text-white
+  @apply min-h-full min-w-full overflow-x-auto bg-slate-950 text-white;
+}
+
+.anticon.anticon-left,
+.anticon.anticon-rigth {
+  @apply text-white;
+}
+
+li.ant-pagination-items:not(.ant-pagination-item-active)>a {
+  color: white !important;
+}
+
+
+
+span.ant-pagination-item-ellipsis {
+  color: white !important
 }
