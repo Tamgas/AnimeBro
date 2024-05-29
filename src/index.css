@@ -8,17 +8,19 @@ body,
   @apply min-h-full min-w-full overflow-x-auto bg-slate-950 text-white;
 }
 
+.header-link.active {
+  @apply text-blue-500;
+}
+
 .anticon.anticon-left,
 .anticon.anticon-rigth {
   @apply text-white;
 }
 
-li.ant-pagination-items:not(.ant-pagination-item-active)>a {
-  color: white !important;
+li .ant-pagination-items:not(.ant-pagination-item-active) > a {
+  background-color: white !important;
 }
 
-
-
-span.ant-pagination-item-ellipsis {
-  color: white !important
+span .ant-pagination-item-ellipsis {
+  background-color: white !important;
 }
