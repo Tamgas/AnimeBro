@@ -4,17 +4,20 @@ import { Pagination, PaginationProps } from 'antd';
 import { AnimeList, IPagination, Title } from '../../Types/anime.types';
 // import { Link } from 'react-router-dom';
 import { AnimeCard } from '../../Components';
+import { Loader } from '../../Components/Loader/Loader';
 
 export const AnimeListPage = () => {
   const [titles, setTitles] = useState<Title[]>();
   const [pagination, setPagination] = useState<IPagination>();
   const [activePage, setActivePage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const changePage: PaginationProps['onChange'] = page => {
     setActivePage(page);
   };
 
   useEffect(() => {
+    setLoading(true)
     $api
       .get<AnimeList>('/title/updates', {
         params: {
@@ -26,10 +29,14 @@ export const AnimeListPage = () => {
       .then(response => {
         setTitles(response.data.list);
         setPagination(response.data.pagination);
+        setLoading(false)
+       
       });
   }, [activePage]);
 
-  console.log(titles);
+  if (loading) {
+     return <Loader />;
+  }
 
   return (
     <>
@@ -43,7 +50,6 @@ export const AnimeListPage = () => {
                 title={title?.names.ru}
                 code={title?.code}
               />
-              
             ))}
         </div>
         <div className="flex items-center justify-center bg-white text-red-600">
