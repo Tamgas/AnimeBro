@@ -17,7 +17,7 @@ export const AnimeListPage = () => {
   };
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     $api
       .get<AnimeList>('/title/updates', {
         params: {
@@ -29,13 +29,12 @@ export const AnimeListPage = () => {
       .then(response => {
         setTitles(response.data.list);
         setPagination(response.data.pagination);
-        setLoading(false)
-       
+        setLoading(false);
       });
   }, [activePage]);
 
   if (loading) {
-     return <Loader />;
+    return <Loader />;
   }
 
   return (

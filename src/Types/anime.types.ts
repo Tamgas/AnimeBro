@@ -139,6 +139,7 @@ export interface Skips {
 }
 
 export interface Hls {
+  video: string;
   fhd: string;
   hd: string;
   sd: string;
