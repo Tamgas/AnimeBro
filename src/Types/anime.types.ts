@@ -18,7 +18,7 @@ export interface Title {
   team: Team;
   season: Season;
   description: string;
-  in_favorites: number;
+  in_favorites: number; 
   blocked: Blocked;
   player: Player;
   torrents: Torrents;
@@ -139,6 +139,7 @@ export interface Skips {
 }
 
 export interface Hls {
+  video: string;
   fhd: string;
   hd: string;
   sd: string;

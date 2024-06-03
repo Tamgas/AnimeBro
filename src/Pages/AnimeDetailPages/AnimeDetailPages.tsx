@@ -6,11 +6,14 @@ import ReactPlayer from 'react-player';
 import { Badge } from '../../Components';
 import { Loader } from '../../Components/Loader/Loader';
 
+type VideoQuality = 'sd' | 'hd' | 'fhd';
+
 export const AnimeDetailPages = () => {
   const [title, setTitle] = useState<Title>();
   const [activeEpisode, setActiveEpisode] = useState(1);
   const { code } = useParams();
   const [loading, setLoading] = useState(true);
+  const [video, setVideo] = useState<VideoQuality>('sd');
 
   useEffect(() => {
     setLoading(true);
@@ -27,7 +30,7 @@ export const AnimeDetailPages = () => {
         setTitle(response?.data);
         setLoading(false);
       });
-  }, []);
+  }, [code]);
 
   if (loading) {
     return <Loader />;
@@ -42,7 +45,7 @@ export const AnimeDetailPages = () => {
             {title?.description}
             <div className="flex flex-wrap gap-2 p-2 ">
               {title?.genres.map(genre => (
-                <Badge text={genre} />
+                <Badge key={genre} text={genre} />
               ))}
             </div>
           </p>
@@ -53,20 +56,34 @@ export const AnimeDetailPages = () => {
           <select
             value={activeEpisode}
             onChange={e => setActiveEpisode(Number(e.target.value))}
-            className=" w-full bg-slate-800 p-2 rounded-lg outline-none cursor-pointer "
+            className="w-full bg-slate-800 p-2 rounded-lg outline-none cursor-pointer text-white"
           >
             {title?.player.list.map(episode => (
-              <option value={episode?.episode}>Серия {episode?.episode}</option>
+              <option
+                key={episode?.uuid}
+                value={episode?.episode}
+                className="bg-slate-700 text-white"
+              >
+                Серия {episode?.episode}
+              </option>
             ))}
+          </select>
+          <select
+            onChange={e => setVideo(e.target.value as VideoQuality)}
+            className="mt-4 w-full bg-slate-800 p-2 rounded-lg outline-none cursor-pointer text-white"
+          >
+            <option value="sd" className="bg-slate-700 text-white">SD</option>
+            <option value="hd" className="bg-slate-700 text-white">HD</option>
+            <option value="fhd" className="bg-slate-700 text-white">FullHD</option>
           </select>
 
           {title?.player.list.map(episode => (
             <div className="mt-5" key={episode?.uuid}>
-              {episode?.episode == activeEpisode ? (
+              {episode?.episode === activeEpisode ? (
                 <ReactPlayer
                   width="100%"
                   height="100%"
-                  url={VIDEO_HOST + episode?.hls.fhd}
+                  url={VIDEO_HOST + episode?.hls[video]}
                   controls
                 />
               ) : null}
