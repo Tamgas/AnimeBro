@@ -18,7 +18,7 @@ export interface Title {
   team: Team;
   season: Season;
   description: string;
-  in_favorites: number;
+  in_favorites: number; 
   blocked: Blocked;
   player: Player;
   torrents: Torrents;
