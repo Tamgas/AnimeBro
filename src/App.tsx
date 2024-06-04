@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { AnimeDetailPages, AnimeListPage, HomePage, Schedule } from './Pages';
+import { AnimeDetailPages, AnimeListPage, HomePage } from './Pages';
+import Schedule from './Pages/Schedule/Schedule';
 import { Layout } from './Components';
 
 export const App: React.FC = () => {
