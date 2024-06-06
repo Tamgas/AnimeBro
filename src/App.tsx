@@ -1,8 +1,8 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AnimeDetailPages, AnimeListPage, HomePage } from './Pages';
 import Schedule from './Pages/Schedule/Schedule';
 import { Layout } from './Components';
+import Schedule from './Pages/Schedule/Schedule';
 
 export const App: React.FC = () => {
   return (
