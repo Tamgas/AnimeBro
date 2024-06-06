@@ -23,13 +23,13 @@ export const MobileMenu = () => {
         }`}
       >
         <nav className="w-full h-full container flex flex-col items-end gap-5 ">
-          <NavLink to="/anime-list" className="text-2xl font-semibold ">
+          <NavLink onClick={() => setActive(false)} to="/anime-list" className="text-2xl font-semibold ">
             Список Аниме
           </NavLink>
-          <NavLink to="/last-updates" className="text-2xl font-semibold">
+          <NavLink  onClick={() => setActive(false)}  to="/last-updates" className="text-2xl font-semibold">
             Последние Обновление
           </NavLink>
-          <NavLink to="schedule" className="text-2xl font-semibold">
+          <NavLink onClick={() => setActive(false)} to="schedule" className="text-2xl font-semibold">
             Расписание
           </NavLink>
         </nav>

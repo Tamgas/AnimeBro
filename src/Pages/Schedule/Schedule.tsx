@@ -16,6 +16,7 @@ const daysOfWeek = [
 interface AnimeTitle {
   posters: any;
   id: number;
+  
   code: string;
   names: {
     ru: string;
@@ -68,10 +69,11 @@ const Schedule: React.FC = () => {
 
   return (
     <div className="container py-5">
-      <h2 className="text-center text-lg mt-2">Расписание</h2>
+      <h2 className="text-center text-lg mt-2  py-6 ">Расписание выхода тайтлов</h2>
       {schedule.map(daySchedule => (
         <div key={daySchedule.day} className="py-5">
-          <h3 className="text-xl">{daysOfWeek[daySchedule.day]}</h3>
+          <h3 className="text-xl bg-violet-700 py-5 text-center ">{daysOfWeek[daySchedule.day]}</h3>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center py-5">
             {daySchedule.list.map(item => (
               <AnimeCard
