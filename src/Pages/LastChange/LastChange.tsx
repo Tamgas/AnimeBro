@@ -5,7 +5,7 @@ import { AnimeList, IPagination, Title } from '../../Types/anime.types';
 import { AnimeCard } from '../../Components';
 import { Loader } from '../../Components/Loader/Loader';
 
-export const AnimeListPage = () => {
+export const LastChange = () => {
   const [titles, setTitles] = useState<Title[]>();
   const [pagination, setPagination] = useState<IPagination>();
   const [activePage, setActivePage] = useState(1);
@@ -18,11 +18,11 @@ export const AnimeListPage = () => {
   useEffect(() => {
     setLoading(true);
     $api
-      .get<AnimeList>('/title/updates', {
+      .get<AnimeList>('/title/changes', {
         params: {
           playlist_type: 'array',
           page: activePage,
-          items_per_page: 6,
+          items_per_page: 9,
         },
       })
       .then(response => {
@@ -39,6 +39,7 @@ export const AnimeListPage = () => {
   return (
     <>
       <div className="container py-5">
+        <h2 className="text-center text-lg mt-2 py-6">Последние Изменение в Тайтлах</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 justify-items-center py-5">
           {titles &&
             titles.map(title => (
