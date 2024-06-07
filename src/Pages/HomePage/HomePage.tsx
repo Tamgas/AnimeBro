@@ -30,7 +30,6 @@ export const HomePage: React.FC = () => {
         params: {
           items_per_page: 9,
           search: search,
-          
         },
       })
       .then(response => {
