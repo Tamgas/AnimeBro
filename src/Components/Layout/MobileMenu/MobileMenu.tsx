@@ -7,8 +7,8 @@ export const MobileMenu = () => {
 
   return (
     <>
-      <header className="md:hidden sticky top-0 left-0 bg-slate-900 border-b border-slate-500 z-10 ">
-        <nav className="container flex item-center justify-between py-2">
+      <header className="md:hidden sticky top-0 left-0 bg-slate-900 border-b border-slate-500 z-10">
+        <nav className="container flex items-center justify-between py-2">
           <h1 className="text-2xl bg-gradient-to-r from-blue-500 to-violet-500 font-bold bg-clip-text text-transparent">
             <Link to="/">AniBro</Link>
           </h1>
@@ -22,14 +22,14 @@ export const MobileMenu = () => {
           active ? '-translate-y-0' : '-translate-y-full'
         }`}
       >
-        <nav className="w-full h-full container flex flex-col items-end gap-5 ">
-          <NavLink onClick={() => setActive(false)} to="/anime-list" className="text-2xl font-semibold ">
+        <nav className="w-full h-full container flex flex-col items-end gap-5">
+          <NavLink onClick={() => setActive(false)} to="/anime-list" className="text-2xl font-semibold">
             Список Аниме
           </NavLink>
-          <NavLink  onClick={() => setActive(false)}  to="/last-updates" className="text-2xl font-semibold">
-            Последние Обновление
+          <NavLink onClick={() => setActive(false)} to="/last-changes" className="text-2xl font-semibold">
+            Последние Изменения
           </NavLink>
-          <NavLink onClick={() => setActive(false)} to="schedule" className="text-2xl font-semibold">
+          <NavLink onClick={() => setActive(false)} to="/schedule" className="text-2xl font-semibold">
             Расписание
           </NavLink>
         </nav>
