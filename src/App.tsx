@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 import { AnimeDetailPages, AnimeListPage, HomePage, LastChange } from './Pages';
 import { Layout } from './Components';
 import Schedule from './Pages/Schedule/Schedule';
-import Schedule from './Pages/Schedule/Schedule';
 
 export const App: React.FC = () => {
   return (
