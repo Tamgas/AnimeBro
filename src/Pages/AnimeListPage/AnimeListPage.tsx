@@ -22,7 +22,7 @@ export const AnimeListPage = () => {
         params: {
           playlist_type: 'array',
           page: activePage,
-          items_per_page: 6,
+          items_per_page: 8,
         },
       })
       .then(response => {
@@ -35,6 +35,13 @@ export const AnimeListPage = () => {
   if (loading) {
     return <Loader />;
   }
+
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <>
@@ -69,6 +76,12 @@ export const AnimeListPage = () => {
             showSizeChanger={false}
           />
         </div>
+        <button
+          className="fixed bottom-10 right-10 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+          onClick={scrollToBottom}
+        >
+          Вниз
+        </button>
       </div>
     </>
   );
