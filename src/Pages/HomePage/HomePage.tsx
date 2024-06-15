@@ -8,6 +8,12 @@ export const HomePage: React.FC = () => {
   const [search, setSearch] = useState<string>('');
   const [titles, setTitles] = useState<Title[] | undefined>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [randomTitles, setRandomTitles] = useState<Title[]>([]);
+  const [randomLoading, setRandomLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    getRandomTitles();
+  }, []);
 
   useEffect(() => {
     if (search.trim() === '') {
@@ -38,6 +44,27 @@ export const HomePage: React.FC = () => {
       });
   };
 
+  const getRandomTitles = async () => {
+    setRandomLoading(true);
+    try {
+      const uniqueTitles = new Set<string>();
+      const titlesArray: Title[] = [];
+      while (uniqueTitles.size < 9) {
+        const response = await $api.get<Title>('/v3/title/random');
+        const title = response.data;
+        if (!uniqueTitles.has(title.id.toString())) {
+          uniqueTitles.add(title.id.toString());
+          titlesArray.push(title);
+        }
+      }
+      setRandomTitles(titlesArray);
+    } catch (error) {
+      console.error('Failed to fetch random titles', error);
+    } finally {
+      setRandomLoading(false);
+    }
+  };
+
   return (
     <div className="container py-10">
       <div className="max-w-3xl mx-auto text-center">
@@ -66,20 +93,40 @@ export const HomePage: React.FC = () => {
         </form>
       </div>
       <div className="container mx-auto py-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {loading ? (
+        {titles && titles.length > 0 && (
+          <div className="mb-10">
+            <h2 className="text-2xl font-bold mb-5">Результаты поиска</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {loading ? (
+                <Loader />
+              ) : (
+                titles.map(title => (
+                  <AnimeCard
+                    key={title.id}
+                    image={title?.posters.original.url}
+                    title={title?.names.ru}
+                    code={title?.code}
+                  />
+                ))
+              )}
+            </div>
+          </div>
+        )}
+        <div>
+          <h2 className="text-2xl font-bold mb-5">Случайное аниме</h2>
+          {randomLoading ? (
             <Loader />
-          ) : titles && titles.length ? (
-            titles.map(title => (
-              <AnimeCard
-                key={title.id}
-                image={title?.posters.original.url}
-                title={title?.names.ru}
-                code={title?.code}
-              />
-            ))
           ) : (
-            <p></p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {randomTitles.map(title => (
+                <AnimeCard
+                  key={title.id}
+                  image={title?.posters.original.url}
+                  title={title?.names.ru}
+                  code={title?.code}
+                />
+              ))}
+            </div>
           )}
         </div>
       </div>

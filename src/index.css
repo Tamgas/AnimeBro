@@ -13,11 +13,11 @@ body,
 }
 
 .anticon.anticon-left,
-.anticon.anticon-rigth {
+.anticon.anticon-right { /* Fixed a typo here */
   @apply text-white;
 }
 
-li .ant-pagination-items:not(.ant-pagination-item-active) > a {
+li .ant-pagination-item:not(.ant-pagination-item-active) > a {
   background-color: white !important;
 }
 

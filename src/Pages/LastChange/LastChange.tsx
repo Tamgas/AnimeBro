@@ -32,6 +32,13 @@ export const LastChange = () => {
       });
   }, [activePage]);
 
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth'
+    });
+  };
+
   if (loading) {
     return <Loader />;
   }
@@ -39,7 +46,7 @@ export const LastChange = () => {
   return (
     <>
       <div className="container py-5">
-        <h2 className="text-center text-lg mt-2 py-6">Последние Изменение в Тайтлах</h2>
+        <h2 className="text-center text-lg mt-2 py-6 ">Последние Изменение в Тайтлах</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 justify-items-center py-5">
           {titles &&
             titles.map(title => (
@@ -51,6 +58,12 @@ export const LastChange = () => {
               />
             ))}
         </div>
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 fixed bottom-10 right-10"
+          onClick={scrollToBottom}
+        >
+          Вниз
+        </button>
         <div className="flex items-center justify-center bg-white text-red-600">
           <Pagination
             className="md:hidden block text-red-600"
