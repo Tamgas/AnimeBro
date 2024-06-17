@@ -50,7 +50,7 @@ export const HomePage: React.FC = () => {
       const uniqueTitles = new Set<string>();
       const titlesArray: Title[] = [];
       while (uniqueTitles.size < 9) {
-        const response = await $api.get<Title>('/v3/title/random');
+        const response = await $api.get<Title>('/title/random');
         const title = response.data;
         if (!uniqueTitles.has(title.id.toString())) {
           uniqueTitles.add(title.id.toString());
@@ -62,6 +62,7 @@ export const HomePage: React.FC = () => {
       console.error('Failed to fetch random titles', error);
     } finally {
       setRandomLoading(false);
+      
     }
   };
 

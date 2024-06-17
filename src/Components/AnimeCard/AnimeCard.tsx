@@ -1,28 +1,35 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AnimeCardProps } from './AnimeCard.types';
 import { IMG_HOST } from '../../api';
+import { useInView } from 'react-intersection-observer';
 
 export const AnimeCard = ({ code, image, title }: AnimeCardProps) => {
-  const nav = useNavigate();
-  return (
-    <>
-      <div
-        onClick={() => nav(`/title/${code}`)}
-        className=" w-full border border-slate-500 rounded-lg md:p-2 p-5 "
-      >
-        <img src={IMG_HOST + image} alt="" className="mx-auto" />
+  const navigate = useNavigate();
+  const { ref, inView } = useInView({
+    triggerOnce: true, 
+    rootMargin: '100px', 
+  });
 
-        <div />
-        <h2 className="text-center text-lg mt-2 truncate ">{title}</h2>
-        <div className="flex  items-center justify-center p-2">
-          <Link
-            to={`/title/${code}`}
-            className="bg-gradient-to-r from-blue-500 to-violet-500 px-3 py-2 rounded-lg font-semibold hover:opacity-85 transition-opacity"
-          >
-            Перейти к просмотру
-          </Link>
-        </div>
-      </div>
-    </>
+  return (
+    <div
+      className="w-full border border-slate-500 rounded-lg p-5 flex flex-col items-center cursor-pointer"
+      ref={ref}
+    >
+      {inView && (
+        <img
+          src={`${IMG_HOST}/${image}`}
+          alt={title}
+          className="rounded-lg w-full md:w-auto"
+          loading="lazy"
+        />
+      )}
+      <h2 className="mt-2 text-lg font-semibold text-center">{title}</h2>
+      <button
+        onClick={() => navigate(`/title/${code}`)}
+        className="mt-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 w-full md:w-auto"
+      >
+        Перейти к просмотру
+      </button>
+    </div>
   );
 };
