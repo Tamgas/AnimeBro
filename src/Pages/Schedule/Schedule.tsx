@@ -30,6 +30,7 @@ interface AnimeTitle {
     week_day: number;
   };
   date: string;
+  
 }
 
 interface ScheduleDay {
@@ -83,6 +84,7 @@ const Schedule: React.FC = () => {
       {schedule.map(daySchedule => (
         <div
           key={daySchedule.day}
+          
           className="py-5 animate-fadeIn"
         >
           <h3 className={`text-xl py-5 text-center text-white ${getDayStyle(daySchedule.day)}`}>

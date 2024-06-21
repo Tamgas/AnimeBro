@@ -14,6 +14,7 @@ export const AnimeCard = ({ code, image, title }: AnimeCardProps) => {
     <div
       className="w-full border border-slate-500 rounded-lg p-5 flex flex-col items-center cursor-pointer"
       ref={ref}
+      onClick={() => navigate(`/title/${code}`)}
     >
       {inView && (
         <img
