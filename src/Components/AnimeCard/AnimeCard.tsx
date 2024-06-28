@@ -12,7 +12,7 @@ export const AnimeCard = ({ code, image, title }: AnimeCardProps) => {
 
   return (
     <div
-      className="w-full border border-slate-500 rounded-lg p-5 flex flex-col items-center cursor-pointer"
+      className="w-full border border-gray-300 shadow-lg rounded-xl p-4 flex flex-col items-center bg-white transform transition-transform hover:scale-105 cursor-pointer"
       ref={ref}
       onClick={() => navigate(`/title/${code}`)}
     >
@@ -20,17 +20,21 @@ export const AnimeCard = ({ code, image, title }: AnimeCardProps) => {
         <img
           src={`${IMG_HOST}/${image}`}
           alt={title}
-          className="rounded-lg w-full md:w-auto"
+          className="rounded-t-xl w-full h-auto object-cover"
           loading="lazy"
         />
       )}
-      <h2 className="mt-2 text-lg font-semibold text-center">{title}</h2>
-      <button
-        onClick={() => navigate(`/title/${code}`)}
-        className="mt-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 w-full md:w-auto"
-      >
-        Перейти к просмотру
-      </button>
+      <div className="w-full p-4 flex flex-col items-center">
+        <h2 className="text-xl font-bold text-gray-800 text-center mb-2 truncate w-full">
+          {title}
+        </h2>
+        <button
+          onClick={() => navigate(`/title/${code}`)}
+          className="mt-2 bg-indigo-600 text-white py-2 px-6 rounded-full hover:bg-indigo-800 transition-colors w-full"
+        >
+          Перейти к просмотру
+        </button>
+      </div>
     </div>
   );
 };

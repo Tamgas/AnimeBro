@@ -6,3 +6,5 @@ export const VIDEO_HOST = 'https://cache.libria.fun';
 export const $api = axios.create({
   baseURL: 'https://api.anilibria.tv/v3/',
 });
+
+
