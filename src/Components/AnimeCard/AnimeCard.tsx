@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnimeCardProps } from './AnimeCard.types';
 import { IMG_HOST } from '../../api';
@@ -6,21 +7,29 @@ import { useInView } from 'react-intersection-observer';
 export const AnimeCard = ({ code, image, title }: AnimeCardProps) => {
   const navigate = useNavigate();
   const { ref, inView } = useInView({
-    triggerOnce: true, 
-    rootMargin: '100px', 
+    triggerOnce: true,
+    rootMargin: '100px',
   });
+
+  // State to manage visibility of the card
+  const [isVisible, setIsVisible] = useState(true);
+
+  const handleClick = () => {
+    navigate(`/title/${code}`);
+    setIsVisible(false); // Hide the card when navigating
+  };
 
   return (
     <div
-      className="w-full border border-gray-300 shadow-lg rounded-xl p-4 flex flex-col items-center bg-white transform transition-transform hover:scale-105 cursor-pointer"
+      className={`w-full border border-gray-300 rounded-xl p-4 flex flex-col items-center bg-white cursor-pointer ${isVisible ? '' : 'hidden'}`}
       ref={ref}
-      onClick={() => navigate(`/title/${code}`)}
+      onClick={handleClick}
     >
       {inView && (
         <img
           src={`${IMG_HOST}/${image}`}
           alt={title}
-          className="rounded-t-xl w-full h-auto object-cover"
+          className="rounded-xl w-full h-auto object-cover"
           loading="lazy"
         />
       )}
@@ -29,7 +38,7 @@ export const AnimeCard = ({ code, image, title }: AnimeCardProps) => {
           {title}
         </h2>
         <button
-          onClick={() => navigate(`/title/${code}`)}
+          onClick={handleClick}
           className="mt-2 bg-indigo-600 text-white py-2 px-6 rounded-full hover:bg-indigo-800 transition-colors w-full"
         >
           Перейти к просмотру
