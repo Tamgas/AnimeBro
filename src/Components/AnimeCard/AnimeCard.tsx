@@ -11,12 +11,12 @@ export const AnimeCard = ({ code, image, title }: AnimeCardProps) => {
     rootMargin: '100px',
   });
 
-  // State to manage visibility of the card
+  
   const [isVisible, setIsVisible] = useState(true);
 
   const handleClick = () => {
     navigate(`/title/${code}`);
-    setIsVisible(false); // Hide the card when navigating
+    setIsVisible(false);
   };
 
   return (
